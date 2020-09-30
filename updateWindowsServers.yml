@@ -1,0 +1,23 @@
+- hosts: appservers
+  connection: winrm
+  tasks:
+    - name: Update app servers
+      win_updates:
+       category_names:
+         - CriticalUpdates
+         - DefinitionUpdates
+         - SecurityUpdates
+         - Updates
+       reboot: yes
+       reboot_timeout: 600
+
+- hosts: domaincontrollers
+  connection: winrm
+  tasks:
+    - name: Update Domain Controllers servers
+      win_updates:
+       category_names:
+         - CriticalUpdates
+         - SecurityUpdates
+       reboot: yes
+       reboot_timeout: 600
