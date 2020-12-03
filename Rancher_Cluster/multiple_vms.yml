@@ -1,0 +1,17 @@
+---
+vcenter_hostname: 192.168.1.144
+username: <vcenter username>
+password: <vcenter password>
+folder: Rancher Cluster
+datastore: datastore2
+vmtemplate: ubuntu20
+#customization_spec: <your customization spec>
+#vmcluster: vsancluster
+servers:
+  - cc-rancher-mgmt01
+  - cc-rancher-mgmt02
+  - cc-rancher-mgmt03
+  - cc-rancher-mgmt04
+  - cc-rancher-worker01
+  - cc-rancher-worker02
+  - cc-rancher-worker03

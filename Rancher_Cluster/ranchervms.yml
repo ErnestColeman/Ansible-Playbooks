@@ -1,0 +1,33 @@
+---
+- name: Clone multiple VMs
+  hosts: localhost 
+  gather_facts: false
+  vars_files: 
+    multiple_vms.yml
+  tasks: 
+  - name: Clone multiple VMs from template
+    local_action:
+      module: vmware_guest
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no      
+      folder: "{{ folder }}"
+      template: "{{ vmtemplate }}"
+      name: "{{ item }}"
+      datacenter: HomeDataCenter
+      datastore: "{{ datastore }}"
+      state: poweredon
+      networks:
+      - name: VM Network
+        ip: 192.168.1.244
+        netmask: 255.255.255.0
+        gateway: 192.168.1.1
+        dns_servers:
+        - 192.168.1.234
+        type: static
+      customization:
+        hostname: cc-rancher-mgmt01
+        dns_servers:
+        - 192.168.1.234
+    with_items: "{{ servers }}"
